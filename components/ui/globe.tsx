@@ -16,9 +16,9 @@ const GLOBE_CONFIG: COBEOptions = {
   diffuse: 0.4,
   mapSamples: 16000,
   mapBrightness: 1.2,
-  baseColor: [60 / 255, 9 / 255, 73 / 255],  // Set baseColor to #3C0949
+  baseColor: [60 / 255, 9 / 255, 73 / 255], // Set baseColor to #3C0949
   markerColor: [251 / 255, 100 / 255, 21 / 255],
-  glowColor: [60 / 255, 9 / 255, 73 / 255],  // Set glowColor to #3C0949
+  glowColor: [60 / 255, 9 / 255, 73 / 255], // Set glowColor to #3C0949
   markers: [
     { location: [14.5995, 120.9842], size: 0.03 },
     { location: [19.076, 72.8777], size: 0.1 },
@@ -43,18 +43,18 @@ export function Globe({
   let phi = 0;
   let width = 0;
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const pointerInteracting = useRef(null);
-  const pointerInteractionMovement = useRef(0);
-  const [r, setR] = useState(0);
+  const pointerInteracting = useRef<number | null>(null);
+  const pointerInteractionMovement = useRef<number>(0);
+  const [r, setR] = useState<number>(0);
 
-  const updatePointerInteraction = (value: any) => {
+  const updatePointerInteraction = (value: number | null) => {
     pointerInteracting.current = value;
     if (canvasRef.current) {
-      canvasRef.current.style.cursor = value ? "grabbing" : "grab";
+      canvasRef.current.style.cursor = value !== null ? "grabbing" : "grab";
     }
   };
 
-  const updateMovement = (clientX: any) => {
+  const updateMovement = (clientX: number) => {
     if (pointerInteracting.current !== null) {
       const delta = clientX - pointerInteracting.current;
       pointerInteractionMovement.current = delta;
@@ -63,13 +63,13 @@ export function Globe({
   };
 
   const onRender = useCallback(
-    (state: Record<string, any>) => {
+    (state: { phi: number; width: number; height: number }) => {
       if (!pointerInteracting.current) phi += 0.005;
       state.phi = phi + r;
       state.width = width * 2;
       state.height = width * 2;
     },
-    [r],
+    [r]
   );
 
   const onResize = () => {
@@ -97,17 +97,17 @@ export function Globe({
     <div
       className={cn(
         "absolute inset-0 mx-auto aspect-[1/1] w-full max-w-[600px]",
-        className,
+        className
       )}
     >
       <canvas
         className={cn(
-          "size-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]",
+          "size-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]"
         )}
         ref={canvasRef}
         onPointerDown={(e) =>
           updatePointerInteraction(
-            e.clientX - pointerInteractionMovement.current,
+            e.clientX - pointerInteractionMovement.current
           )
         }
         onPointerUp={() => updatePointerInteraction(null)}

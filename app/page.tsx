@@ -1,13 +1,13 @@
 "use client"
 
 import { Moon, Sun } from 'lucide-react'
-import Image from "next/image"
+// import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
+// import { Input } from "@/components/ui/input"
 import { ContactForm } from "@/components/contact-form"
 import AuthenticationCard from "@/components/AuthenticationCard";
 import { Stats } from "@/components/stats"
@@ -17,7 +17,7 @@ import { DataExport } from "@/components/data-export"
 import { KnowledgeSection } from "@/components/knowledge-section"
 import { Objectives } from "@/components/objectives"
 import { Footer } from "@/components/footer"
-import { Globe } from '@/components/ui/globe'
+// import { Globe } from '@/components/ui/globe'
 import Meteors from '@/components/ui/meteors'
 //import Particles from '@/components/ui/particles'
 
